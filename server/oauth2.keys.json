@@ -1,0 +1,13 @@
+{
+    "web": {
+        "client_id": "621264399604-0ucjp86c64radth0mgh6fd5c55520vmd.apps.googleusercontent.com",
+        "project_id": "note-taking-in-zoom",
+        "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+        "token_uri": "https://oauth2.googleapis.com/token",
+        "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+        "client_secret": "FqtVc7wC99WjchYhJnK2JfJL",
+        "redirect_uris": [
+            "http://localhost:3000/oauth2callback"
+        ]
+    }
+}
