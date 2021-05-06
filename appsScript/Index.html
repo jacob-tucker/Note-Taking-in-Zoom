@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <base target="_top">
+</head>
+
+<body>
+    <br />
+    <input
+        style="background: lightblue; border: 1px solid black; width: 100px; height: 75px; position: absolute; top: 50%; left: 50%; transform: translateX(-50%) translateY(-50%);"
+        type="button" id="button" value="Start" onclick="changeStarted()" />
+</body>
+<script>
+    var started = "Start";
+    function changeStarted() {
+        google.script.run.recordTimestamp();
+        if (started == "Start") {
+            started = "Stop";
+        } else if (started == "Stop") {
+            started = "Start";
+        }
+        document.getElementById('button').value = started;
+    }
+</script>
+
+</html>
