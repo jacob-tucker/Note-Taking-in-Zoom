@@ -74,10 +74,9 @@ async function authenticate(scopes) {
 
 async function runSample() {
     // retrieve user profile
-    const service = google.drive('v3');
+    const service = google.drive('v2');
     const res = await service.files.list({
-        pageSize: 10,
-        fields: 'nextPageToken, files(id, name)',
+        fields: 'nextPageToken, files(id, name)'
     });
     const files = res.data.files;
     if (files.length === 0) {
@@ -90,43 +89,21 @@ async function runSample() {
     }
 }
 
-/**
- * Retrieve a list of revisions.
- *
- * @param {String} fileId ID of the file to retrieve revisions for.
- * @param {Function} callback Function to call when the request is complete.
- */
-async function retrieveRevisions(fileId) {
+async function printDocText(fileId) {
     // retrieve user profile
-    const service = google.drive('v3');
-    const res = await service.revisions.list({
+    const service = google.drive('v2');
+    var res = await service.files.get({
         'fileId': fileId
     });
-    console.log(res.data)
-}
-
-/**
- * Print information about the specified revision.
- *
- * @param {String} fileId ID of the file to print revision for.
- * @param {String} revisionId ID of the revision to print.
- */
-async function printRevisionTime(fileId, revisionId) {
-    // retrieve user profile
-    const service = google.drive('v3');
-    var res = await service.revisions.get({
-        'fileId': fileId,
-        'revisionId': revisionId
-    });
-    console.log(res.data.modifiedTime)
+    console.log(res.data.exportLinks["text/plain"])
 }
 
 const scopes = [
     'https://www.googleapis.com/auth/drive.metadata.readonly',
+    'https://www.googleapis.com/auth/drive.readonly'
 ];
 
 authenticate(scopes)
-    //.then(client => runSample())
-    //.then(client => retrieveRevisions("195J8C_-uQN0L5WsrlloDG33zf8VupbQUxQlf8pWjKl4"))
-    .then(client => printRevisionTime("195J8C_-uQN0L5WsrlloDG33zf8VupbQUxQlf8pWjKl4", 1))
+    .then(client => runSample())
+    //.then(client => printDocText("195J8C_-uQN0L5WsrlloDG33zf8VupbQUxQlf8pWjKl4"))
     .catch(console.error);
