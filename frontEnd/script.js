@@ -27,10 +27,15 @@ window.onload = function () {
                     else if (contents[i] == '#' && firstHashtag) {
                         substrings.push(substring)
                         substring = ''
+                        // Skip the stop message
+                        i += 19
                         firstHashtag = false
                     }
+                    else if (i == contents.length - 1) {
+                        substrings.push(substring)
+                    }
                     // If you've started reading this section
-                    else if (firstHashtag) {
+                    else {
                         substring = substring.concat(contents[i])
                     }
                 }
@@ -50,16 +55,31 @@ function putInHTML(substrings) {
         var text = substrings[i]
 
         var newText = text.split("\r\n")
-        console.log(newText)
+
         var paragraphText = ''
         for (let j = 0; j < newText.length; j++) {
             paragraphText += newText[j] + "<br>"
         }
+
         demo.innerHTML += `
-            <div class="noteSection">
-                <p>${paragraphText}</p>
-                <video src="../postProcessing/${i}_video.mp4" controls></video>
-            </div>
+        <div class="noteSection">
+            <p>${paragraphText}</p>
+            <video id="${i}_video" src="../postProcessing/${i}_video.mp4" controls></video>
+        </div>
         `
+    }
+    var vids = document.querySelectorAll("video");
+
+    // for all the videos in the page
+    for (var x = 0; x < vids.length; x++) {
+        // add an event listening for errors
+        vids[x].addEventListener('error', function (e) {
+            // if the error is caused by the video not loading
+            if (this.networkState > 2) {
+                // add an image with the message "video not found"
+                this.style.display = 'none';
+            }
+        }, true);
+
     }
 }
