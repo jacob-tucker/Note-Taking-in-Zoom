@@ -1,30 +1,16 @@
-# World War 1 5:28:12 PM 
+﻿# World War 1: 7:40:02 PM
+I am not paying attention in class.
+I can’t wait to play League of Legends after.
 
 
-This was a war
-Blah blah blah blah
-Whatever
+# stop: 7:40:11 PM
 
 
-# stop: 5:28:44 PM
+# World War 2: 7:40:15 PM
 
 
+World War II began in Europe on September 1, 1939, when Germany invaded Poland.
 
 
-# World War 2: 5:28:51 PM 
-
-
-Blah blah blah
-# World War 1: 5:28:12 PM
-
-This was a war
-Blah blah blah blah
-Whatever
-
-# stop: 5:28:44 PM
-
-
-# World War 2: 5:28:51 PM
-
-Blah blah blah
-# stop: 5:29:01 PM
+The main combatants were the Axis powers (Germany, Italy, and Japan) and the Allies (France, Great Britain, the United States, the Soviet Union, and, to a lesser extent, China).
+# stop: 7:40:20 PM

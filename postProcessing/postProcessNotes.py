@@ -6,7 +6,6 @@ from datetime import datetime
 
 class NotesPostProcessor:
 
-
     myTextFile = None
     durationSlices = []
     firstLineFlag = None
@@ -21,18 +20,17 @@ class NotesPostProcessor:
             for line in f:
                 stripped_line = line.strip()
                 if self.firstLineFlag:
-                    stripped_line = stripped_line[3:]
+                    stripped_line = stripped_line[1:]
                     self.firstLineFlag = False
                 if len(stripped_line) != 0:
                     if stripped_line[0] == '#':
                         # Arrived at a timestamp, grab it, and store it in seconds
                         temp = self.getTimeStamp(stripped_line)
-                        print(temp)
                         ts = self.convertToSeconds(temp)
                         self.timeStamps.append(ts)
             self.computeDurations()
-            print("TimeStamps: " + str(self.timeStamps))
-            print("Index, start, end, durations: " + str(self.durationSlices))
+            # print("TimeStamps: " + str(self.timeStamps))
+            # print("Index, start, end, durations: " + str(self.durationSlices))
 
     def getTimeStamp(self, s):
         title, timeStamp = s.split(':', 1)
@@ -73,5 +71,6 @@ class NotesPostProcessor:
 ###
 ### Testing
 ###
-p = NotesPostProcessor("test.txt")
-p.parseText()
+# p = NotesPostProcessor("test.txt")
+
+# p.parseText()

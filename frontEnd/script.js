@@ -9,10 +9,10 @@ window.onload = function () {
         if (file.type.match(textType)) {
             var reader = new FileReader();
 
+            var substrings = []
             reader.onload = function (e) {
                 var contents = reader.result;
                 var firstHashtag = false
-                var substrings = []
                 var substring = ''
 
                 // This essentially reads through the contents of
@@ -34,8 +34,7 @@ window.onload = function () {
                         substring = substring.concat(contents[i])
                     }
                 }
-
-                console.log(substrings)
+                putInHTML(substrings)
             }
 
             reader.readAsText(file);
@@ -43,4 +42,24 @@ window.onload = function () {
             fileDisplayArea.innerText = "File not supported!"
         }
     });
+}
+
+function putInHTML(substrings) {
+    demo = document.getElementById("demoContainer")
+    for (let i = 0; i < substrings.length; i++) {
+        var text = substrings[i]
+
+        var newText = text.split("\r\n")
+        console.log(newText)
+        var paragraphText = ''
+        for (let j = 0; j < newText.length; j++) {
+            paragraphText += newText[j] + "<br>"
+        }
+        demo.innerHTML += `
+            <div class="noteSection">
+                <p>${paragraphText}</p>
+                <video src="../postProcessing/${i}_video.mp4" controls></video>
+            </div>
+        `
+    }
 }
