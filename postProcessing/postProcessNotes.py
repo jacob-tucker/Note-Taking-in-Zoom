@@ -27,6 +27,7 @@ class NotesPostProcessor:
                     if stripped_line[0] == '#':
                         # Arrived at a timestamp, grab it, and store it in seconds
                         temp = self.getTimeStamp(stripped_line)
+                        print(temp)
                         ts = self.convertToSeconds(temp)
                         self.timeStamps.append(ts)
             self.computeDurations()
@@ -58,7 +59,7 @@ class NotesPostProcessor:
 
     def computeDurations(self):
         if self.checkEven():
-            sliceIndex = 1
+            sliceIndex = 0
             for i in range(1, len(self.timeStamps), 2):
                 curr_start = self.timeStamps[i-1]
                 curr_end = self.timeStamps[i]

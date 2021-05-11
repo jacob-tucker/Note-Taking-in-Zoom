@@ -1,5 +1,4 @@
-<<<<<<< HEAD:my-awesome-file.txt
-﻿# World War 1 5:28:12 PM 
+# World War 1 5:28:12 PM 
 
 
 This was a war
@@ -16,8 +15,7 @@ Whatever
 
 
 Blah blah blah
-=======
-﻿# World War 1: 5:28:12 PM
+# World War 1: 5:28:12 PM
 
 This was a war
 Blah blah blah blah
@@ -29,5 +27,4 @@ Whatever
 # World War 2: 5:28:51 PM
 
 Blah blah blah
->>>>>>> b279f16ca1c895eab7a92c258cbbaee248414f88:postProcessing/test.txt
 # stop: 5:29:01 PM

@@ -14,4 +14,4 @@ for file_list in drive.ListFile({'q': "title contains '%s'" % str(sys.argv[1])})
   for eachFile in file_list:
     print('title: %s, id: %s' % (eachFile['title'], eachFile['id']))
     file = drive.CreateFile({'id': eachFile['id']})
-    file.GetContentFile('my-awesome-file.txt') # downloads 'My Awesome File.txt' as 'my-awesome-file.txt'
+    file.GetContentFile('test.txt')
