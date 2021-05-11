@@ -12,7 +12,7 @@
 
 ### Step 3
 - Open a Terminal and go into the /postProcessing folder
-- In Terminal, run the command python3 main.py "Test For Notes" "XX:XX:XX YY", where XX:XX:XX could take the form
+- In Terminal, run the command ```python3 main.py "Test For Notes" "XX:XX:XX YY"```, where XX:XX:XX could take the form
 of 07:38:40 and YY could either be AM or PM
 
 ### Step 4
