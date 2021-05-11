@@ -12,7 +12,7 @@
 
 ### Step 3
 - Open a Terminal and go into the /postProcessing folder
-- In Terminal, run the command ```python3 main.py "Test For Notes" "HH:MM:SS YY"```, where XX:XX:XX represents the starting time the zoom recording (ex. 07:38:40) and YY could either be AM or PM
+- In Terminal, run the command ```python3 main.py "Test For Notes" "HH:MM:SS YY"```, where HH:MM:SS represents the starting time the zoom recording (ex. 07:38:40) and YY could either be AM or PM
 
 ### Step 4
 - Open index.html
