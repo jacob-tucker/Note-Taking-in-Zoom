@@ -7,6 +7,8 @@ import postProcessNotes
 
 from moviepy.editor import *
 
+import pyinotify
+
 gauth = GoogleAuth()
 gauth.LocalWebserverAuth()
 
