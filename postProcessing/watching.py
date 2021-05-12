@@ -32,12 +32,12 @@ class Handler(FileSystemEventHandler):
 
         elif event.event_type == 'created':
             # Take any action here when a file is first created.
-            title = event.src_path[event.src_path.find('Zoom')+16:event.src_path.find('Zoom')+24].strip()
+            title = event.src_path[event.src_path.find('Zoom')+16:event.src_path.find('Zoom')+24].strip().replace('.', ':')
             print(title)
 
         elif event.event_type == 'modified':
             # Taken any action here when a file is modified.
-            title = event.src_path[event.src_path.find('Zoom')+16:event.src_path.find('Zoom')+24].strip()
+            title = event.src_path[event.src_path.find('Zoom')+16:event.src_path.find('Zoom')+24].strip().replace('.', ':')
             print(title)
 
 
