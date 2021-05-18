@@ -41,16 +41,17 @@ class Handler(FileSystemEventHandler):
 		def on_created(event):
 				if event.is_directory:
 						timestamp = event.src_path[event.src_path.find('Zoom')+16:event.src_path.find('Zoom')+24].strip().replace('.', ':')
-						print(timestamp)
-						# start_time_seconds = ... CONVERT THE TIMESTAMP TO SECONDS HERE
+						startTimeSeconds = get_sec_military(timestamp)
+						
+						nameOfFolder = event.src_path[event.src_path.find('Zoom')+5:]
+						
+						doClipping(startTimeSeconds, nameOfFolder)
 
-						partialTitle = event.src_path[event.src_path.find('Zoom')+5:]
-						title = partialTitle[:partialTitle.find('/')]
-						print(title)
+def get_sec_military(time_str):
+	h, m, s = time_str.split(':')
+	seconds = int(h) * 3600 + int(m) * 60 + int(s)
 
-# run watchdog
-w = Watcher()
-w.run()
+	return seconds
 
 def doClipping(start_time_seconds, name_of_folder):
 	# this gets the text from the google doc in srs.argv[1] and writes it
@@ -76,3 +77,7 @@ def doClipping(start_time_seconds, name_of_folder):
 def subclip(movie, start_time, end_time, index):
 		video = VideoFileClip(movie).subclip(start_time,end_time)
 		video.write_videofile(str(index) + "_video.mp4") # CHANGE TO WEBM FOR FINISHED PRODUCT
+
+# run watchdog
+w = Watcher()
+w.run()
