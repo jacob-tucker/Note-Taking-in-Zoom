@@ -3,7 +3,7 @@ function onOpen() {
 
   // sets a global variable "started" to false
   PropertiesService.getDocumentProperties().setProperty('started', 'false')
-  
+
   // Adds a button at the top called Record
   ui.createMenu('Record')
     .addItem('Open Sidebar', 'openSidebar')
@@ -13,11 +13,11 @@ function onOpen() {
 function openSidebar() {
   var html = HtmlService.createHtmlOutputFromFile('Index');
   DocumentApp.getUi()
-      .showSidebar(html);
+    .showSidebar(html);
 }
 
 function recordTimestamp() {
-  
+
   // Gets the current time
   var d = new Date();
   var timeStamp = d.toLocaleTimeString();
@@ -28,13 +28,13 @@ function recordTimestamp() {
 
   var document = DocumentApp.getActiveDocument();
   var cursor = document.getCursor().getElement();
-  var childIndex  = cursor.getParent().getChildIndex(cursor);
+  var childIndex = cursor.getParent().getChildIndex(cursor);
   if (started == 'false') {
     var ui = DocumentApp.getUi();
 
     var result = ui.prompt(
-        'Your Section Title',
-        ui.ButtonSet.OK_CANCEL);
+      'Your Section Title',
+      ui.ButtonSet.OK_CANCEL);
 
     // Process the user's response.
     var button = result.getSelectedButton();
@@ -43,11 +43,13 @@ function recordTimestamp() {
       // User clicked "OK".
       var startedPar = body.insertParagraph(childIndex, "# " + text + ": " + timeStamp);
       startedPar.setHeading(DocumentApp.ParagraphHeading.HEADING3);
+      startedPar.editAsText().setForegroundColor("#FFC0CB");
       PropertiesService.getDocumentProperties().setProperty('started', 'true');
     }
   } else if (started == 'true') {
-    body.insertParagraph(childIndex, "# stop: " + timeStamp);
+    var endedPar = body.insertParagraph(childIndex, "# stop: " + timeStamp);
+    endedPar.editAsText().setForegroundColor("#FFC0CB");
     PropertiesService.getDocumentProperties().setProperty('started', 'false');
   }
-  
+
 }
