@@ -3,20 +3,16 @@
 ## Current Steps:
 
 ### Step 1
-- Take notes on Google docs, name the Google Doc whatever you want, but let's name it "Test For Notes"
-- Use the appsScript to take notes and watch as timestamps get put on the screen
+- Take notes on Google docs
+- Click "Record" -> "Open Sidebar" in the top menu
+- Use the start and stop button to make sections of your notes
 
 ### Step 2
-- Drag the zoom recording .mp4 into /postProcessing folder
-- Name the zoom recording demo_class.mp4
-
-### Step 3
 - Open a Terminal and go into the /postProcessing folder
-- In Terminal, run the command ```python3 main.py "Test For Notes" "HH:MM:SS YY"```, where HH:MM:SS represents the starting time the zoom recording (ex. 07:38:40) and YY could either be AM or PM
-
-### Step 4
-- Open index.html
-- Select the button on the webpage and click on the test.txt file that got generated when you run the
-python script, it should be in the /postProcessing folder
+- In Terminal, run the command ```python3 main.py```. This will create a background
+script waiting for new directories to appear in the Zoom folder *Note: You may have to change
+the location of your Zoom folder inside main.py
 
 ### Done
+Now, if a new directory appears in the Zoom folder, it will launch a webpage matching
+your notes to the sections of the video. Congrats!
