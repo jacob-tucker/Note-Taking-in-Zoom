@@ -1,0 +1,22 @@
+video {
+    width: 400px;
+    height: 400px;
+}
+
+#demoContainer {
+    position: absolute;
+}
+
+.noteSection {
+    position: relative;
+    display: flex;
+    width: 98vw;
+    align-items: center;
+    justify-content: space-around;
+    background: lightblue;
+    margin-bottom: 5px;
+}
+
+.noteSection p {
+    width: 25%;
+}

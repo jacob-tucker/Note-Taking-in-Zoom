@@ -10,10 +10,12 @@ class NotesPostProcessor:
     durationSlices = []
     firstLineFlag = None
     timeStamps = []
+    filePath = None
 
     def __init__(self, filePath):
         self.firstLineFlag = True
         self.myTextFile = open(filePath, "r")
+        self.filePath = filePath
 
     def parseText(self):
         with self.myTextFile as f:
@@ -31,6 +33,35 @@ class NotesPostProcessor:
             self.computeDurations()
             # print("TimeStamps: " + str(self.timeStamps))
             # print("Index, start, end, durations: " + str(self.durationSlices))
+
+    def parseTextForSubstrings(self):
+        self.myTextFile = open(self.filePath, "r")
+        firstHashtag = False
+        substring = ''
+        substrings = []
+
+        with self.myTextFile as f:
+            for line in f:
+                index = 0
+                while index < len(line):
+                    # If you encounter a new section
+                    if (line[index] == '#' and (not firstHashtag)):
+                        firstHashtag = True
+                        # This i++ is to skip the space following the #
+                        index += 2
+                    elif (line[index] == '#' and firstHashtag):
+                        substrings.append(substring)
+                        substring = ''
+                        # Skip the stop message
+                        index += 20
+                        firstHashtag = False
+                    # If you've started reading this section
+                    elif firstHashtag:
+                        substring += line[index]
+                        index += 1
+                    else:
+                        index += 1
+        return substrings
 
     def getTimeStamp(self, s):
         title, timeStamp = s.split(':', 1)

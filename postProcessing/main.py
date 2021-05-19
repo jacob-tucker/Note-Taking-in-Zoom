@@ -10,6 +10,10 @@ import time
 from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler
 
+# import for opening HTML file
+import webbrowser
+import os.path
+
 # google drive auth
 gauth = GoogleAuth()
 gauth.LocalWebserverAuth()
@@ -68,8 +72,15 @@ def doClipping(start_time_seconds, name_of_folder):
 	p = postProcessNotes.NotesPostProcessor("test.txt")
 	p.parseText()
 
-	for clip in p.durationSlices:
-		subclip("../../Documents/Zoom/" + name_of_folder + "/zoom_0.mp4", clip[1]-start_time_seconds, clip[2]-start_time_seconds, clip[0])
+
+	#for clip in p.durationSlices:
+	#	subclip("../../Documents/Zoom/" + name_of_folder + "/zoom_0.mp4", clip[1]-start_time_seconds, clip[2]-start_time_seconds, clip[0])
+
+	# we want to write an html file with python and parse through the text as well
+	substrings = p.parseTextForSubstrings()
+	createHTML(substrings)
+
+	webbrowser.open_new('file://' + os.path.realpath('index.html'))
 
 #input:
 #movie(string), start_time(int - in seconds), end_time(int - in seconds)
@@ -77,6 +88,42 @@ def doClipping(start_time_seconds, name_of_folder):
 def subclip(movie, start_time, end_time, index):
 		video = VideoFileClip(movie).subclip(start_time,end_time)
 		video.write_videofile(str(index) + "_video.mp4") # CHANGE TO WEBM FOR FINISHED PRODUCT
+
+def createHTML(substrings):
+	f = open('index.html', 'w')
+
+	sections = ""
+	i = 0
+	while i < len(substrings):
+		newText = substrings[i].split("\n")
+
+		paragraphText = ''
+		for j in range(len(newText)):
+			paragraphText += newText[j] + "<br>"
+
+		sections += """
+		<div class="noteSection">
+			<p>{}</p>
+			<video id="{}_video" src="./{}_video.mp4" controls></video>
+		</div>
+		""".format(paragraphText, i, i)
+		i += 1
+
+	message = """
+	<!DOCTYPE html>
+	<html>
+	<head>
+		<link rel="stylesheet" href="index.css">
+	</head>
+	<body>
+		<div id="demoContainer">
+			{}
+		</div>
+	</body>
+	</html>""".format(sections)
+
+	f.write(message)
+	f.close()
 
 # run watchdog
 w = Watcher()
