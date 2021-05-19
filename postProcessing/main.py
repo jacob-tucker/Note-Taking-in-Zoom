@@ -73,8 +73,8 @@ def doClipping(start_time_seconds, name_of_folder):
 	p.parseText()
 
 
-	#for clip in p.durationSlices:
-	#	subclip("../../Documents/Zoom/" + name_of_folder + "/zoom_0.mp4", clip[1]-start_time_seconds, clip[2]-start_time_seconds, clip[0])
+	for clip in p.durationSlices:
+		subclip("../../Documents/Zoom/" + name_of_folder + "/zoom_0.mp4", clip[1]-start_time_seconds, clip[2]-start_time_seconds, clip[0])
 
 	# we want to write an html file with python and parse through the text as well
 	substrings = p.parseTextForSubstrings()
