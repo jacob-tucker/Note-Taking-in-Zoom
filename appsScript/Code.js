@@ -5,7 +5,7 @@ function onOpen() {
   PropertiesService.getDocumentProperties().setProperty('started', 'false')
 
   // Adds a button at the top called Record
-  ui.createMenu('Record')
+  ui.createMenu('SynchroNote')
     .addItem('Open Sidebar', 'openSidebar')
     .addToUi();
 }
