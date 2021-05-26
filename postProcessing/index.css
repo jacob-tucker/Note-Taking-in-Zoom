@@ -5,6 +5,7 @@ video {
 
 #demoContainer {
     position: absolute;
+    top: 100px;
 }
 
 .noteSection {
@@ -19,4 +20,16 @@ video {
 
 .noteSection p {
     width: 25%;
+}
+
+#searchbar {
+    position: absolute;
+    top: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 2px;
+    outline: 0;
+    border: 2px solid skyblue;
+    padding: 5px;
+    font-size: 18px;
 }

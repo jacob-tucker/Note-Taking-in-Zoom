@@ -114,8 +114,12 @@ def createHTML(substrings):
 	<html>
 	<head>
 		<link rel="stylesheet" href="index.css">
+		<script type="text/javascript" src="./index.js"></script>
 	</head>
 	<body>
+		<!-- input tag -->
+		<input id="searchbar" onkeyup="search_text()" type="text"
+			name="search" placeholder="Search notes..">
 		<div id="demoContainer">
 			{}
 		</div>
