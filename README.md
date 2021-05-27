@@ -4,7 +4,7 @@
 
 ### Step 1
 - Take notes on Google docs
-- Click "Record" -> "Open Sidebar" in the top menu
+- Click "SynchroNote" -> "Open Sidebar" in the top menu
 - Use the start and stop button to make sections of your notes
 
 ### Step 2
