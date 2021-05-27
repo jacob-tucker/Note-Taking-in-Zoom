@@ -85,7 +85,7 @@ def doClipping(start_time_seconds, name_of_folder):
 	htmlIndex = createHTML(substrings, videoNumbers)
 
 	# open the html file in the browser
-	webbrowser.open_new('file://' + os.path.realpath('index_{}.html'.format(htmlIndex)))
+	webbrowser.open_new('file://' + os.path.realpath('webpages/index_{}.html'.format(htmlIndex)))
 
 #input:
 #movie(string), start_time(int - in seconds), end_time(int - in seconds)
@@ -96,12 +96,12 @@ def subclip(movie, start_time, end_time):
 	# reference it in the video element
 	videoNumber = 0
 	while True:
-		if os.path.exists('{}_video.mp4'.format(videoNumber)):
+		if os.path.exists('videos/{}_video.mp4'.format(videoNumber)):
 			videoNumber += 1
 		else:
 			break
 	video = VideoFileClip(movie).subclip(start_time,end_time)
-	video.write_videofile("{}_video.mp4".format(videoNumber)) # CHANGE TO WEBM FOR FINISHED PRODUCT
+	video.write_videofile("videos/{}_video.mp4".format(videoNumber)) # CHANGE TO WEBM FOR FINISHED PRODUCT
 
 	return videoNumber
 
@@ -110,12 +110,15 @@ def createHTML(substrings, videoNumbers):
 	# overwrite an existing html page
 	htmlPageNumber = 0
 	while True:
-		if os.path.exists('index_{}.html'.format(htmlPageNumber)):
+		if os.path.exists('webpages/index_{}.html'.format(htmlPageNumber)):
 			htmlPageNumber += 1
 		else:
 			break
-	f = open('index_{}.html'.format(htmlPageNumber), 'w')
 
+	# creates a new web page
+	f = open('webpages/index_{}.html'.format(htmlPageNumber), 'w')
+
+	# creates each block of notes (the notes with the video corresponding to it)
 	sections = ""
 	i = 0
 	while i < len(substrings):
@@ -128,17 +131,20 @@ def createHTML(substrings, videoNumbers):
 		sections += """
 		<div class="noteSection">
 			<p>{}</p>
-			<video id="{}_video" src="./{}_video.mp4" controls></video>
+			<video id="{}_video" src="../videos/{}_video.mp4" controls></video>
 		</div>
 		""".format(paragraphText, videoNumbers[i], videoNumbers[i])
 		i += 1
 
+	# the main html structure
+	# inserts all the noteSection div blocks using the format
+	# string thingy for python
 	message = """
 	<!DOCTYPE html>
 	<html>
 	<head>
-		<link rel="stylesheet" href="index.css">
-		<script type="text/javascript" src="./index.js"></script>
+		<link rel="stylesheet" href="../index.css">
+		<script type="text/javascript" src="../index.js"></script>
 	</head>
 	<body>
 		<!-- input tag -->

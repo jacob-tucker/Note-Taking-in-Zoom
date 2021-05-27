@@ -19,6 +19,7 @@ class NotesPostProcessor:
         self.durationSlices = []
         self.timeStamps = []
 
+    # this is for timestamp information
     def parseText(self):
         with self.myTextFile as f:
             for line in f:
@@ -36,6 +37,8 @@ class NotesPostProcessor:
             # print("TimeStamps: " + str(self.timeStamps))
             # print("Index, start, end, durations: " + str(self.durationSlices))
 
+    # this is for actually getting the different sections of notes
+    # inbetween hashtags
     def parseTextForSubstrings(self):
         self.myTextFile = open(self.filePath, "r")
         firstHashtag = False
