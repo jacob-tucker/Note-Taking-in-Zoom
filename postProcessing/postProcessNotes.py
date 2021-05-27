@@ -16,6 +16,8 @@ class NotesPostProcessor:
         self.firstLineFlag = True
         self.myTextFile = open(filePath, "r")
         self.filePath = filePath
+        self.durationSlices = []
+        self.timeStamps = []
 
     def parseText(self):
         with self.myTextFile as f:

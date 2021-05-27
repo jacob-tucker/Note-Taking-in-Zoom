@@ -72,25 +72,49 @@ def doClipping(start_time_seconds, name_of_folder):
 	p = postProcessNotes.NotesPostProcessor("test.txt")
 	p.parseText()
 
-
+	# this will store all of the index's of the videos that the html file will need
+	# for example if our two videos to be put on the page are 2_video.mp4 and 3_video.mp4, this will
+	# hold 2 and 3
+	videoNumbers = []
+	# make a sublip for each of those videos
 	for clip in p.durationSlices:
-		subclip("../../Documents/Zoom/" + name_of_folder + "/zoom_0.mp4", clip[1]-start_time_seconds, clip[2]-start_time_seconds, clip[0])
+		videoNumbers.append(subclip("../../Documents/Zoom/" + name_of_folder + "/zoom_0.mp4", clip[1]-start_time_seconds, clip[2]-start_time_seconds))
 
 	# we want to write an html file with python and parse through the text as well
 	substrings = p.parseTextForSubstrings()
-	createHTML(substrings)
+	htmlIndex = createHTML(substrings, videoNumbers)
 
-	webbrowser.open_new('file://' + os.path.realpath('index.html'))
+	# open the html file in the browser
+	webbrowser.open_new('file://' + os.path.realpath('index_{}.html'.format(htmlIndex)))
 
 #input:
 #movie(string), start_time(int - in seconds), end_time(int - in seconds)
 #subclip your movie, write result to a file
-def subclip(movie, start_time, end_time, index):
-		video = VideoFileClip(movie).subclip(start_time,end_time)
-		video.write_videofile(str(index) + "_video.mp4") # CHANGE TO WEBM FOR FINISHED PRODUCT
+def subclip(movie, start_time, end_time):
+	# making sure to not overwrite previous videos, and then returning the
+	# video number we end up using so the corresponding html file can correctly
+	# reference it in the video element
+	videoNumber = 0
+	while True:
+		if os.path.exists('{}_video.mp4'.format(videoNumber)):
+			videoNumber += 1
+		else:
+			break
+	video = VideoFileClip(movie).subclip(start_time,end_time)
+	video.write_videofile("{}_video.mp4".format(videoNumber)) # CHANGE TO WEBM FOR FINISHED PRODUCT
 
-def createHTML(substrings):
-	f = open('index.html', 'w')
+	return videoNumber
+
+def createHTML(substrings, videoNumbers):
+	# same as the videoNumbers, this makes sure we don't
+	# overwrite an existing html page
+	htmlPageNumber = 0
+	while True:
+		if os.path.exists('index_{}.html'.format(htmlPageNumber)):
+			htmlPageNumber += 1
+		else:
+			break
+	f = open('index_{}.html'.format(htmlPageNumber), 'w')
 
 	sections = ""
 	i = 0
@@ -106,7 +130,7 @@ def createHTML(substrings):
 			<p>{}</p>
 			<video id="{}_video" src="./{}_video.mp4" controls></video>
 		</div>
-		""".format(paragraphText, i, i)
+		""".format(paragraphText, videoNumbers[i], videoNumbers[i])
 		i += 1
 
 	message = """
@@ -128,6 +152,10 @@ def createHTML(substrings):
 
 	f.write(message)
 	f.close()
+
+	# return the html page number
+	# ex. if our page is index_2.html, we return 2 here
+	return htmlPageNumber
 
 # run watchdog
 w = Watcher()
