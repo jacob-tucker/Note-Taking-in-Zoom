@@ -147,9 +147,11 @@ def createHTML(substrings, videoNumbers):
 		<script type="text/javascript" src="../index.js"></script>
 	</head>
 	<body>
-		<!-- input tag -->
-		<input id="searchbar" onkeyup="search_text()" type="text"
-			name="search" placeholder="Search notes..">
+		<div id="header">
+			<h1>SynchroNote</h1>
+			<!-- input tag -->
+			<input id="searchbar" onkeyup="search_text()" type="text" name="search" placeholder="Search notes..">
+		</div>
 		<div id="demoContainer">
 			{}
 		</div>
