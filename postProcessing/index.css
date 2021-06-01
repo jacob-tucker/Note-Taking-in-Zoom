@@ -24,7 +24,7 @@ video {
 }
 
 .noteSection video {
-    margin-bottom: 20px;
+    transform: translateY(-62.5px);
 }
 
 #searchbar {
