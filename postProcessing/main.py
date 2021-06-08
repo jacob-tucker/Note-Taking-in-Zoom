@@ -101,7 +101,7 @@ def subclip(movie, start_time, end_time):
 		else:
 			break
 	video = VideoFileClip(movie).subclip(start_time,end_time)
-	video.write_videofile("videos/{}_video.mp4".format(videoNumber)) # CHANGE TO WEBM FOR FINISHED PRODUCT
+	video.write_videofile("videos/{}_video.mp4".format(videoNumber)) # CHANGE TO WEBM FOR FINISHED PRODUCT FOR AUDIO
 
 	return videoNumber
 
