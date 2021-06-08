@@ -4,8 +4,7 @@
 
 ### Step 1
 - Take notes on Google docs
-- Click "SynchroNote" -> "Open Sidebar" in the top menu
-- Use the start and stop button to make sections of your notes
+- Click "SynchroNote" -> "Start"/"Stop" buttons to create sections
 
 ### Step 2
 - Open a Terminal and go into the /postProcessing folder
